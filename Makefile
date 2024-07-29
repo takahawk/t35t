@@ -1,7 +1,7 @@
 CC ?= gcc
 CFLAGS = $(if $(NODEBUG),,-g)
 
-HEADERS = test.h
+HEADERS = assert.h test.h
 T35T=t35t
 
 INSTALL_BIN_DIR=/usr/local/bin
