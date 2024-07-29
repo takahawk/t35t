@@ -3,7 +3,7 @@ CFLAGS = $(if $(NODEBUG),,-g)
 
 HEADERS = test.h
 
-SYSTEM_INCLUDE_DIR=/usr/local/include/t35t
+SYSTEM_INCLUDE_DIR=/usr/local/include/w/t35t
 
 .PHONY: check install
 

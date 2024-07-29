@@ -41,11 +41,12 @@ tTC_Engage(TestContext *tc) {
 	// TODO: colorful printing 
 	size_t okCount = 0;
 	for (size_t i = 0; i < tc->testCount; i++) {
+		printf("Running test %d... ", i + 1);
 		if (tc->tests[i](tc) == TEST_OK) {
-			printf("Test %d: OK\n", i);
+			printf("OK\n", i);
 			okCount++;
 		} else {
-			printf("Test %d: Error\n", i + 1);
+			printf("Error\n", i + 1);
 		}
 	}
 	
@@ -53,7 +54,7 @@ tTC_Engage(TestContext *tc) {
 		printf("Tests passed %d/%d (all passed)\n", okCount, tc->testCount);
 		return 0;
 	} else {
-		printf("Tests passed %d/%d (errors)\n", okCount, tc->testCount);
+		printf("Tests passed %d/%d (there are errors)\n", okCount, tc->testCount);
 		return -1;
 	}
 }
