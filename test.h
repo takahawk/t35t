@@ -24,7 +24,7 @@ typedef struct TestContext {
 } TestContext;
 
 static inline TestContext
-tTC_AllocTestContext() {
+tTC_Alloc() {
 	TestContext tc;
 	tc.testCount = 0;
 	tc.tests = malloc(100 * sizeof(TestCase));
@@ -36,28 +36,30 @@ tTC_AddTest(TestContext *tc, TestCase tcase) {
 	tc->tests[tc->testCount++] = tcase;
 }
 
-static inline void
+static inline int 
 tTC_Engage(TestContext *tc) {
 	// TODO: colorful printing 
 	size_t okCount = 0;
 	for (size_t i = 0; i < tc->testCount; i++) {
 		if (tc->tests[i](tc) == TEST_OK) {
-			printf("Test %d: OK\n");
+			printf("Test %d: OK\n", i);
 			okCount++;
 		} else {
-			printf("Test %d: Error\n");
+			printf("Test %d: Error\n", i + 1);
 		}
 	}
 	
 	if (okCount == tc->testCount) {
-		printf("Tests passed %d/%d (all passed)\n");
+		printf("Tests passed %d/%d (all passed)\n", okCount, tc->testCount);
+		return 0;
 	} else {
-		printf("Tests passed %d/%d (errors)\n");
+		printf("Tests passed %d/%d (errors)\n", okCount, tc->testCount);
+		return -1;
 	}
 }
 
 static inline void
-tTC_FreeTestContext(TestContext *tc) {
+tTC_Free(TestContext *tc) {
 	free(tc->tests);
 	tc->tests = NULL;
 	tc->testCount = 0;
