@@ -2,12 +2,21 @@
 #define TEST_CASE_H_
 
 #include <stddef.h>
+#include <stdlib.h>
 
-typedef TestCase (*TestFunc) (TestContext);
+typedef enum {
+	TEST_FAILED,
+	TEST_OK
+} TestResult;
 
-typedef struct {
+struct TestContext;
+
+typedef TestResult(*TestCase) (struct TestContext) ;
+
+typedef struct TestContext {
 	// TODO: init?
 	// TODO: arraylist?
+	// TODO: test descriptions
 	size_t testCount;
 	TestCase *tests;
 
@@ -22,8 +31,8 @@ tTC_AllocTestContext() {
 }
 
 static inline void
-tTC_AddTest(TestCase tc) {
-	tc->tests[testCount++] = tc;
+tTC_AddTest(TestContext *tc, TestCase tcase) {
+	tc->tests[tc->testCount++] = tcase;
 }
 
 static inline void
