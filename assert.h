@@ -6,10 +6,10 @@
 
 
 #define _PrintEquals(X, expected) _Generic(X, \
-	String: fprintf(stderr, "%s equals %s\n", X.str, expected.str) \
+	String: fprintf(stderr, "\"%s\" equals \"%s\"\n", X.str, expected.str) \
 	)
 #define _PrintNotEquals(X, expected) _Generic(X, \
-	String: fprintf(stderr, "%s not equals %s\n", X.str, expected.str) \
+	String: fprintf(stderr, "\"%s\" not equals \"%s\"\n", X.str, expected.str) \
 	)
 #define _Equals(X, expected) _Generic(X, \
 		String: S_Equals(X, expected))

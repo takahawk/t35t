@@ -14,7 +14,8 @@ echo "======================================="
 
 for t in `echo $TEST_DIR/*.c`; do
 	echo "Test file: $t"
-	gcc -o tst $t && ./tst
+	# TODO: *.c is quickfix. figure out something cleaner
+	gcc -o tst $t *.c && ./tst
 	EXIT_CODE=`! (( $EXIT_CODE | $? )); echo $?`
 	rm -f ./tst
 	echo "---------------------------------------"
