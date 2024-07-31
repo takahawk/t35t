@@ -15,8 +15,8 @@ echo "======================================="
 
 for t in `echo $TEST_DIR/*.c`; do
 	echo "Test file: $t"
-	# TODO: *.c is quickfix. figure out something cleaner
-	gcc -o tst $t *.c && ./tst
+	# TODO: add test config; remove hardcoded libs
+	gcc -o tst $t *.c -Wl,-rpath,/usr/local/lib -ld4t4-5tructur35 && ./tst
 	EXIT_CODE=`! (( $EXIT_CODE | $? )); echo $?`
 	rm -f ./tst
 	echo "---------------------------------------"
