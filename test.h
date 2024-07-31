@@ -44,18 +44,18 @@ tTC_Engage(TestContext *tc) {
 	for (size_t i = 0; i < tc->testCount; i++) {
 		printf("Running test %d... ", i + 1);
 		if (tc->tests[i](tc) == TEST_OK) {
-			printf(CLI_COLOR_GREEN "OK\n" CLI_COLOR_RESET);
+			printf(uIO_Green("OK\n"));
 			okCount++;
 		} else {
-			printf(CLI_COLOR_RED "Error\n" CLI_COLOR_RESET);
+			printf(uIO_Red("Error\n"));
 		}
 	}
 	
 	if (okCount == tc->testCount) {
-		printf(CLI_COLOR_GREEN "Tests passed %d/%d (all passed)\n" CLI_COLOR_RESET, okCount, tc->testCount);
+		printf(uIO_Green("Tests passed %d/%d (all passed)\n"), okCount, tc->testCount);
 		return 0;
 	} else {
-		printf(CLI_COLOR_RED "Tests passed %d/%d (there are errors)\n" CLI_COLOR_RESET, okCount, tc->testCount);
+		printf(uIO_Red("Tests passed %d/%d (there are errors)\n"), okCount, tc->testCount);
 		return -1;
 	}
 }
