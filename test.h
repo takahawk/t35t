@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "w/ut1l5/io.h"
+
 typedef enum {
 	TEST_FAILED,
 	TEST_OK
@@ -38,23 +40,22 @@ tTC_AddTest(TestContext *tc, TestCase tcase) {
 
 static inline int 
 tTC_Engage(TestContext *tc) {
-	// TODO: colorful printing 
 	size_t okCount = 0;
 	for (size_t i = 0; i < tc->testCount; i++) {
 		printf("Running test %d... ", i + 1);
 		if (tc->tests[i](tc) == TEST_OK) {
-			printf("OK\n", i);
+			printf(CLI_COLOR_GREEN "OK\n" CLI_COLOR_RESET);
 			okCount++;
 		} else {
-			printf("Error\n", i + 1);
+			printf(CLI_COLOR_RED "Error\n" CLI_COLOR_RESET);
 		}
 	}
 	
 	if (okCount == tc->testCount) {
-		printf("Tests passed %d/%d (all passed)\n", okCount, tc->testCount);
+		printf(CLI_COLOR_GREEN "Tests passed %d/%d (all passed)\n" CLI_COLOR_RESET, okCount, tc->testCount);
 		return 0;
 	} else {
-		printf("Tests passed %d/%d (there are errors)\n", okCount, tc->testCount);
+		printf(CLI_COLOR_RED "Tests passed %d/%d (there are errors)\n" CLI_COLOR_RESET, okCount, tc->testCount);
 		return -1;
 	}
 }

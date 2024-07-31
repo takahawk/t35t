@@ -7,6 +7,7 @@ else
 	TEST_DIR=$1
 fi
 
+shopt -s nullglob
 EXIT_CODE=0
 
 echo "RUNNING TESTS in $TEST_DIR directory..."
@@ -20,3 +21,4 @@ for t in `echo $TEST_DIR/*.c`; do
 	rm -f ./tst
 	echo "---------------------------------------"
 done
+
